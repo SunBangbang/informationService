@@ -1,0 +1,69 @@
+<form reportSubmit bindsubmit="submit">
+    <view class="padding-sm margin-sm bg-white radius shadow flex align-center">
+        <image class="radius phone_image" mode="aspectFill" src="{{img}}"></image>
+        <view class="padding-left-sm flex-sub flex flex-direction justify-between" style="height: 130rpx;">
+            <view class="text-df text-black text-bold">{{name}}</view>
+            <view class="text-grey text-sm">{{!type?'电话咨询':'图文咨询'}}</view>
+            <view class="text-red text-lg" wx:if="{{price>0}}">￥{{price}}</view>
+            <view class="text-red text-lg" wx:else>{{system.free_name||'免费咨询'}}</view>
+        </view>
+    </view>
+    <view class="padding-sm margin-sm bg-white radius shadow">
+        <textarea class="phone_textarea text-df text-black" name="content" placeholder="请输入备注" placeholderClass="text-grey text-bold"></textarea>
+    </view>
+    <view class="padding-sm margin-sm bg-white radius shadow" style="margin-bottom: 120rpx;">
+        <view class="cu-bar">
+            <view class="action">
+				上传图片
+			</view>
+            <view class="action">
+				{{imgList.length}}/9
+			</view>
+        </view>
+        <view class="cu-form-group">
+            <view class="grid col-3 grid-square flex-sub padding-top-sm">
+                <view bindtap="ViewImage" class="bg-img" data-url="{{imgList[index]}}" wx:for="{{imgList}}" wx:key="{{index}}">
+                    <image mode="aspectFill" src="{{imgList[index]}}"></image>
+                    <view catchtap="DelImg" class="cu-tag bg-red" data-index="{{index}}">
+                        <text class="cuIcon-close"></text>
+                    </view>
+                </view>
+                <view bindtap="ChooseImage" class="solids" wx:if="{{imgList.length<4}}">
+                    <text class="cuIcon-cameraadd"></text>
+                </view>
+            </view>
+        </view>
+        <view class="cu-form-group margin-top-sm">
+            <view class="title">姓名</view>
+            <input maxlength="4" name="name" placeholder="请输入您的姓名"></input>
+        </view>
+        <view class="cu-form-group">
+            <view class="title">联系手机</view>
+            <input maxlength="11" name="phone" placeholder="请输入您的手机号" type="number" value="{{userInfo.phone}}"></input>
+        </view>
+        <block wx:if="{{!type}}">
+            <view class="cu-form-group">
+                <view class="title">选择日期</view>
+                <picker bindchange="DateChange" class="flex-sub" mode="date" start="{{date}}" style="min-height:100rpx" value="{{date}}">
+                    <view class="picker">
+						{{date}}
+					</view>
+                </picker>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">选择时间</view>
+                <picker bindchange="TimeChange" class="flex-sub" mode="time" style="min-height:100rpx" value="{{time}}">
+                    <view class="picker">
+						{{time}}
+					</view>
+                </picker>
+            </view>
+        </block>
+    </view>
+    <view class="cu-bar bg-white tabbar border shop foot" style="height: 100rpx;">
+        <view class="action text-red" style="font-size:34rpx;flex: 1;text-align: left;padding-left: 10rpx;" wx:if="{{price>0}}">￥{{price}}</view>
+        <view class="action text-red" style="font-size:34rpx;flex: 1;text-align: left;padding-left: 10rpx;" wx:else>{{system.free_name||'免费咨询'}}</view>
+        <button class="bg-red submit text-df" formType="submit" style="max-width: 280rpx;background: {{system.foot_color2}};color: {{system.text_color}};">立即预约</button>
+    </view>
+</form>
+<blacklist isShow="{{userInfo.state==1}}"></blacklist>

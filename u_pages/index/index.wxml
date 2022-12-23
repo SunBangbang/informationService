@@ -1,0 +1,35 @@
+<page-meta>
+    <navigation-bar title="{{data.xcx_name}}"></navigation-bar>
+</page-meta>
+<view class="padding-sm">
+    <banner data="{{banner}}" wx:if="{{banner.length&&system.is_banner==2}}"></banner>
+    <view class="flex align-center margin-tb-xs" style="line-height: 70rpx;height: 70rpx;" wx:if="{{notice&&system.is_notice==2}}">
+        <image class="notice-icon" src="../../static/icon/notice_icon.png"></image>
+        <swiper autoplay circular vertical class="flex-sub padding-left-sm" style="height: 70rpx;">
+            <swiper-item wx:for="{{notice}}">
+                <view bindtap="toNotice" class="text-bold text-sm" data-index="{{index}}">{{item.title}}</view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="grid col-{{nav.length>4?'5':'4'}} padding-tb-sm" wx:if="{{nav&&nav.length}}">
+        <view bindtap="toPage" class="flex flex-direction align-center padding-tb-xs" data-item="{{item}}" wx:for="{{nav}}">
+            <image class="nav-icon" src="{{item.img}}"></image>
+            <view class="padding-top-sm text-sm">{{item.title}}</view>
+        </view>
+    </view>
+    <view class="padding-tb-sm flex align-center solid-top" wx:if="{{system.ad.length&&system.is_ad2=='2'}}">
+        <view bindtap="toPage" class="flex-sub flex justify-center align-center" data-item="{{item}}" wx:for="{{system.ad}}">
+            <image class="ad" mode="widthFix" src="{{item.img}}"></image>
+        </view>
+    </view>
+    <view class="solid-top" wx:if="{{system.is_tj_law==2&&lawyer_list}}">
+        <title mClass="padding-tb-sm" more_url="lawyer" title="推荐{{system.law_custom}}"></title>
+        <lawyer-list data="{{lawyer_list}}"></lawyer-list>
+    </view>
+    <view class="solid-top" wx:if="{{system.is_tj_new==2&&news_list}}">
+        <title mClass="padding-tb-sm" more_url="news" title="新闻动态"></title>
+        <news-list data="{{news_list}}"></news-list>
+    </view>
+</view>
+<tabbar show="{{show_tabbar}}"></tabbar>
+<blacklist isShow="{{userInfo.state==1}}" mStyle="color:{{system.foot_color2}};"></blacklist>

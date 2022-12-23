@@ -1,0 +1,46 @@
+page {
+    padding-bottom: 100rpx;
+}
+
+.cu-bar.foot {
+    box-shadow: none;
+}
+
+.image {
+    border-radius: 0rpx;
+}
+
+.top-bg {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.sub-content {
+    position: absolute;
+    top: 61rpx;
+    width: 100%;
+}
+
+.zy {
+    color: #2363fc;
+    background: #d2defb;
+    border: 1rpx solid #2363fc;
+}
+
+.law_icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.law_icon .v {
+    position: absolute;
+    bottom: -24rpx;
+    width: 100%;
+}
+
+.cu-bar.tabbar.shop .action {
+    width: 120rpx;
+}

@@ -1,0 +1,151 @@
+<page-meta>
+    <navigation-bar title="{{system.law_custom+'详情'}}"></navigation-bar>
+</page-meta>
+<form reportSubmit bindsubmit="submitFromId">
+    <view class="top-bg">
+        <image class="image" mode="widthFix" src="{{system.law_bg}}" style="width: 100%;"></image>
+        <view class="padding sub-content text-sm" style="">
+            <view class="bg-white padding radius shadow" style="min-height: 310rpx;">
+                <view class="flex justify-between align-start" style="min-height: 100rpx;">
+                    <view class="">
+                        <view class="flex align-center">
+                            <view class="text-xl text-bold">{{name}}</view>
+                            <view class="margin-left-sm zy padding-lr-xs text-xs" style="line-height: 30rpx;min-height: 30rpx;">{{system.zhiye}}{{work_year}} 年</view>
+                        </view>
+                        <view class="flex align-center padding-top-xs">
+                            <view>{{province_name}} {{city_name}}</view>
+                            <view class="padding-left-xs">|</view>
+                            <view class="padding-left-xs">{{lawfirm}}</view>
+                        </view>
+                        <view class="padding-top-xs">
+							{{system.zyzh}}：{{licenseno}}
+						</view>
+                        <view class="flex padding-tb-xs align-start padding-right-sm" style="width: 100%;">
+                            <view class="">咨询人数：</view>
+                            <view class="">{{yyrzx_num}}人咨询</view>
+                        </view>
+                        <view>评分：<text class="yzd-collection{{index<=score?'_fill':''}} text-df" style="color: {{system.foot_color2}};" wx:for="{{5}}"></text>
+                        </view>
+                    </view>
+                    <view class="margin-left law_icon">
+                        <image class="round" src="{{img}}" style="width: 140rpx;height: 140rpx;"></image>
+                        <view class="v round padding-xs text-xs text-center" style="background: {{system.foot_color2}};color:{{system.text_color}}">
+                            <view class="flex align-center justify-center">
+								{{system.zyls}}
+							</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="flex align-start padding-tb-xs" style="width: 100%;">
+                    <view class="padding-right-sm">擅长：</view>
+                    <view class="flex align-center justify-start flex-sub">
+                        <view class="round text-xs text-center bg-grey" style="height: 40rpx;min-width: 120rpx;line-height: 40rpx;margin-right: 10rpx;" wx:for="{{good}}">{{item}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="margin-lr padding bg-white radius shadow" style="margin-top: 78rpx;">
+        <title bg_tag="{{system.foot_color2}}" more_text="" title="{{system.law_custom}}简介"></title>
+        <view class="padding-top-sm">
+			{{content}}
+		</view>
+    </view>
+    <view class="margin padding bg-white radius shadow">
+        <title bg_tag="{{system.foot_color2}}" more_text="" title="服务项目"></title>
+        <view class="padding-top-sm">
+            <view bindtap="choiceServe" class="flex align-center {{index<fulu_list.length-1?'solid-bottom':''}} padding-tb-xs" data-index="{{index}}" wx:for="{{fulu_list}}">
+                <image src="{{item.icon}}" style="width: 90rpx;height: 90rpx;"></image>
+                <view class="flex-sub padding-left-sm">
+                    <view class="text-lg">{{item.title}}</view>
+                    <view class="padding-top-xs text-sm text-grey">{{item.desc}}</view>
+                </view>
+                <view class="text-red text-bold padding-right-sm" wx:if="{{item.price>0}}">
+					￥{{item.price}}/单
+				</view>
+                <view class="text-red text-bold padding-right-sm" wx:else>
+					{{system.free_name||'免费咨询'}}
+				</view>
+                <view class=" bg-gray text-sm round text-center text-bold" style="width: 35rpx;height: 35rpx;line-height: 35rpx;background: {{index==choice_index?system.foot_color2:'#f1f1f1'}};">
+                    <text class="cuIcon-check text-white"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="margin padding bg-white radius shadow">
+        <title bg_tag="{{system.foot_color2}}" more_text="" more_url="" title="用户评论"></title>
+        <view class="bg-white radius margin-tb-sm">
+            <view class="padding-tb-sm flex solid-top" wx:if="{{comment.length}}" wx:for="{{comment}}">
+                <image class="round" mode="aspectFill" src="{{item.avatarUrl}}" style="width: 90rpx;height: 90rpx;"></image>
+                <view class="flex-sub padding-left-sm">
+                    <view class="flex justify-between align-center">
+                        <view class="text-black text-bold">
+								{{item.nickName}}
+							</view>
+                        <view class="text-grey text-sm">
+								{{item.c_time}}
+							</view>
+                    </view>
+                    <view class="text-black text-df padding-top-xs">
+							{{item.comment}}
+						</view>
+                    <view class="" wx:if="{{item.law_comment}}">
+                        <view class="margin-top-xs text-sm padding-xs bg-gray radius text-grey" style="line-height: 26rpx;">
+                            <text>{{system.law_custom}}回复:</text>
+								{{item.law_comment}}
+							</view>
+                    </view>
+                </view>
+            </view>
+            <view class="flex justify-center" style="width: 100%;" wx:if="{{!comment.length}}">
+                <image mode="widthFix" src="{{no_comment}}" style="width: 60%;"></image>
+            </view>
+        </view>
+    </view>
+    <form reportSubmit bindsubmit="submitFromId">
+        <view class="cu-bar bg-white tabbar border shop foot" style="bottom:{{show_tabbar?'100rpx':'0'}}">
+            <view bindtap="toHome" class="action text-grey">
+                <view class="cuIcon-home" style="border-width: 0;"></view>
+                <view>首页</view>
+            </view>
+            <button bindtap="shareModal" class="action text-grey">
+                <view class="cuIcon-forward"></view>
+                <view>分享</view>
+            </button>
+            <view bindtap="collect" class="action text-grey">
+                <view class="{{is_collect==2?'cuIcon-favorfill':'cuIcon-favor'}}" style="color: {{is_collect==2?system.foot_color2:'#8799a3'}};"></view>
+                <view style="color: {{is_collect==2?system.foot_color2:'#8799a3'}};">{{is_collect==2?'已':''}}收藏</view>
+            </view>
+            <view bindtap="toSubscribe" class="text-df submit" style="background: {{system.foot_color2}};color: {{system.text_color}};" wx:if="{{user_id&&user_id!=userInfo.id}}">
+				立 即 咨 询
+			</view>
+            <view class="text-df submit bg-grey" wx:if="{{user_id&&user_id==userInfo.id}}">
+				不可为自己下单
+			</view>
+        </view>
+    </form>
+</form>
+<tabbar show="{{show_tabbar}}"></tabbar>
+<login isShow="{{isLogin}}" mainColor="{{system.foot_color2}}"></login>
+<blacklist isShow="{{userInfo.state==1}}"></blacklist>
+<view catchtouchmove catchtap="shareModal" class="cu-modal bottom-modal {{isShow?'show':''}}">
+    <view catchtap class="cu-dialog">
+        <view class="padding-xl flex align-center justify-around">
+            <button catchtap="shareModal" class="poster" openType="share">
+                <view class="img bg-gradual-green shadow-blur">
+                    <image mode="widthFix" src="/static/icon/share_friend.png"></image>
+                </view>
+                <view class="padding-top-sm text-grey text-sm">转发给朋友</view>
+            </button>
+            <button catchtap="poster" class="poster">
+                <view class="img bg-gradual-orange shadow-blur">
+                    <image mode="widthFix" src="/static/icon/share_poster.png"></image>
+                </view>
+                <view class="padding-top-sm text-grey text-sm">生成分享海报</view>
+            </button>
+        </view>
+        <view catchtap="shareModal" class="btn padding-tb bg-white">
+            <button class="padding-lr">取消</button>
+        </view>
+    </view>
+</view>

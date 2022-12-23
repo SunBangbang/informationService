@@ -1,0 +1,65 @@
+.header {
+    height: 377rpx;
+    position: relative;
+}
+
+.bg {
+    height: 342rpx;
+    padding-top: 60rpx;
+    background-size: 100% 100%;
+}
+
+.header .nav {
+    position: absolute;
+    width: 706rpx;
+    height: 168rpx;
+    border-radius: 15rpx;
+    left: 25rpx;
+    bottom: 0rpx;
+    font-size: 400rpx;
+}
+
+.header .nav text {
+    font-size: 55rpx;
+    color: #2363fc;
+}
+
+.item {
+    min-height: 100rpx;
+    border-bottom: 1rpx solid rgba(0,0,0,0.05);
+}
+
+.item text:first-child {
+    font-size: 45rpx;
+    color: #2363fc;
+}
+
+.item:last-child {
+    border-width: 0;
+}
+
+.updeta {
+    -webkit-animation: rotate .8s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    25% {
+        -webkit-transform: rotate(-90deg);
+    }
+
+    50% {
+        -webkit-transform: rotate(-180deg);
+    }
+
+    75% {
+        -webkit-transform: rotate(-270deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(-360deg);
+    }
+}

@@ -1,0 +1,34 @@
+.phone_textarea {
+    height: 200rpx;
+    width: 100%;
+}
+
+.phone_image {
+    width: 140rpx;
+    height: 140rpx;
+}
+
+.cu-bar {
+    min-height: 0;
+}
+
+.cu-bar .action:first-child {
+    margin-left: 0;
+    font-size: 30rpx;
+}
+
+.cu-form-group {
+    padding: 0;
+}
+
+.cu-form-group .title {
+    min-width: calc(4em + 30rpx);
+}
+
+.cu-bar.foot {
+    box-shadow: none;
+}
+
+page {
+    padding-bottom: 100rpx;
+}

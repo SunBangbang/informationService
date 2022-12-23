@@ -1,0 +1,141 @@
+<page-meta>
+    <navigation-bar title="{{system.law_custom+'入驻'}}"></navigation-bar>
+</page-meta>
+<image class="top-bg" mode="aspectFill" src="{{system.law_in_img}}"></image>
+<form bindsubmit="submit">
+    <view class="form padding-lr-sm">
+        <view class="bg-white radius padding-lr-sm shadow margin-bottom text-sm">
+            <view class="cu-form-group">
+                <view class="title">真实姓名</view>
+                <input class="flex-sub text-right" maxlength="4" name="name" placeholder="请输入您的姓名"></input>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">手机号码</view>
+                <input class="flex-sub text-right" maxlength="11" name="phone" placeholder="用于接收订单通知" type="number"></input>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">性别</view>
+                <switch checked="{{sex==1}}" class="switch-sex" name="sex"></switch>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">{{system.ssls}}</view>
+                <input class="flex-sub text-right" name="lawfirm" placeholder="请输入{{system.ssls}}"></input>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">{{system.zyzh}}</view>
+                <input class="flex-sub text-right" name="licenseno" placeholder="请输入{{system.zyzh}}"></input>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">所属地区</view>
+                <picker bindchange="Change" bindcolumnchange="addressColumnChange" class="flex-sub" data-i="addressIndx" mode="multiSelector" range="{{address}}" rangeKey="name" value="{{addressIndx}}">
+                    <view class="picker text-black">
+						{{address[0][ addressIndx[0] ].name}} - {{address[1][ addressIndx[1] ].name}}
+					</view>
+                </picker>
+            </view>
+            <view bindtap="getAddress" class="cu-form-group">
+                <view class="title">所在位置</view>
+                <view class="flex-sub padding-right-xs flex align-center justify-end text-sm" style="color: {{system.foot_color2}};" wx:if="{{chooseLocation.address}}">
+                    <text class="text-cut" style="max-width: 432rpx;">{{chooseLocation.address}}</text>
+                </view>
+                <view class="flex-sub text-right text-black padding-right-xs" style="font-size: 28rpx;line-height:100rpx;" wx:else>
+					请选择
+				</view>
+                <view class="cuIcon-right"></view>
+            </view>
+            <view bindtap="toDomain" class="cu-form-group">
+                <view class="title">擅长领域</view>
+                <view class="flex-sub padding-right-xs flex align-center justify-end text-sm" style="color: {{system.foot_color2}};" wx:if="{{goodareas.length}}">
+                    <block wx:for="{{goodareas}}">
+						{{index>0?' ':''}}{{item.title}}
+					</block>
+                </view>
+                <view class="flex-sub text-right text-black padding-right-xs" style="font-size: 28rpx;line-height:100rpx;" wx:else>
+					请选择
+				</view>
+                <view class="cuIcon-right"></view>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">{{system.zhiye}}起始时间</view>
+                <picker bindchange="Change" data-i="date" end="{{date}}" mode="date" value="{{date}}">
+                    <view class="picker text-black">
+						{{date}}
+					</view>
+                </picker>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">电话咨询价格</view>
+                <switch checked bindchange="switchChange" class="m-switch grey sm" data-i="0" name="dh_state"></switch>
+            </view>
+            <view class="cu-form-group" wx:if="{{dh_state}}">
+                <input class="flex-sub" name="dh_price" placeholder="请输入电话咨询价格" type="digit"></input>
+                <view class="text-red padding-lr-xs">元</view>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">图文咨询价格</view>
+                <switch checked bindchange="switchChange" class="m-switch grey sm" data-i="1" name="img_state"></switch>
+            </view>
+            <view class="cu-form-group" wx:if="{{img_state}}">
+                <input class="flex-sub" name="img_price" placeholder="请输入图文咨询价格" type="digit"></input>
+                <view class="text-red padding-lr-xs">元</view>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">在线咨询价格</view>
+                <switch checked bindchange="switchChange" class="m-switch grey sm" data-i="2" name="jslt_state"></switch>
+            </view>
+            <view class="cu-form-group" wx:if="{{jslt_state}}">
+                <input class="flex-sub" name="jslt_price" placeholder="请输入在线咨询价格" type="digit"></input>
+                <view class="text-red padding-lr-xs">元</view>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">个人简介</view>
+            </view>
+            <view class="cu-form-group" style="border-width: 0;">
+                <textarea class="flex-sub" name="content" placeholder="请输入个人简介" style="margin:5rpx 0 30rpx"></textarea>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">入驻期限</view>
+                <picker bindchange="Change" class="flex-sub" data-i="deadlineIndex" mode="selector" range="{{deadline}}" rangeKey="name">
+                    <view class="picker text-black text-sm">
+						{{deadline[deadlineIndex].name}}<text class="padding-left-xs text-red">{{deadline[deadlineIndex].is_pay==1?'(免费)':'￥'+deadline[deadlineIndex].in_money}}</text>
+                    </view>
+                </picker>
+            </view>
+            <view class="padding-lr-sm padding-bottom-sm text-sm text-gray flex align-center">
+                <text class="cuIcon-info padding-right-xs"></text>如果入驻期限为付费项目,在审核失败后费用将原路退回</view>
+            <view class="padding-lr-sm">
+                <title bg_tag="{{system.foot_color2}}" mClass="padding-tb-sm margin-bottom-xs" more_text="" title="上传头像"></title>
+                <view bindtap="ChooseImage" data-type="0" style="width: 160rpx;">
+                    <image class="img" mode="aspectFill" src="{{src}}touxiang.png" wx:if="{{!img}}"></image>
+                    <image class="img" mode="aspectFill" src="{{img}}" wx:else></image>
+                </view>
+            </view>
+            <view class="padding-lr-sm padding-tb">
+                <title bg_tag="{{system.foot_color2}}" mClass="padding-tb-sm margin-bottom-xs" more_text="" title="上传身份证"></title>
+                <view class="flex align-center">
+                    <view bindtap="ChooseImage" data-type="1">
+                        <image class="sfz" mode="aspectFill" src="{{src}}sfz_zheng.png" wx:if="{{!sfz_zheng}}"></image>
+                        <image class="sfz" mode="aspectFill" src="{{sfz_zheng}}" wx:else></image>
+                    </view>
+                    <view bindtap="ChooseImage" data-type="2">
+                        <image class="margin-left sfz" mode="aspectFill" src="{{src}}sfz_fan.png" wx:if="{{!sfz_fan}}"></image>
+                        <image class="margin-left sfz" mode="aspectFill" src="{{sfz_fan}}" wx:else></image>
+                    </view>
+                </view>
+            </view>
+            <view class="padding-lr-sm flex align-center">
+                <view bindtap="radio">
+                    <radio checked="{{radio}}" class="blue" style="transform:scale(0.7);"></radio>
+                </view>
+                <view class="padding-left-xs text-sm text-grey">我已同意<text bindtap="html_page" style="color: {{system.foot_color2}};">《{{system.law_custom}}入驻协议》</text>
+                </view>
+            </view>
+            <view class="padding flex align-center justify-center">
+                <button bindtap="shxx" formType="submit" style="background: {{system.foot_color2}}; color: {{system.text_color}};">提交审核</button>
+            </view>
+        </view>
+    </view>
+</form>
+<tabbar show="{{show_tabbar}}"></tabbar>
+<blacklist isShow="{{userInfo.state==1}}"></blacklist>
+<login isShow="{{isLogin}}" mainColor="{{system.foot_color2}}"></login>

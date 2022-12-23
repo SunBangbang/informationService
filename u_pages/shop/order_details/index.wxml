@@ -1,0 +1,56 @@
+<view bindtap="chooseAddress" class="padding margin-sm radius flex align-center bg-white shadow text-black" style="min-height: 180rpx;" wx:if="{{attribute==2}}">
+    <view class="text-xxl padding-lr-xs">
+        <text class="cuIcon-location"></text>
+    </view>
+    <view class="padding-left-xs flex-sub" wx:if="{{address}}">
+        <view class="flex align-end">
+            <view class="text-lg text-bold">{{address.userName}}</view>
+            <view class="padding-left-xs text-sm">{{address.telNumber}}</view>
+        </view>
+        <view class="text-sm padding-tb-xs">{{address.provinceName}} {{address.cityName}} {{address.countyName}}
+			{{address.detailInfo}}</view>
+    </view>
+    <view class="padding-left-xs flex-sub text-grey" wx:else>
+		请选择收货地址
+	</view>
+    <view class="padding-left-sm">
+        <text class="cuIcon-right"></text>
+    </view>
+</view>
+<view class="padding-lr margin-sm radius bg-white shadow text-black" wx:else>
+    <view class="cu-form-group">
+        <view class="title">姓名</view>
+        <input bindinput="nameInput" maxlength="4" placeholder="请输入您的姓名"></input>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">联系电话</view>
+        <input bindinput="phoneInput" maxlength="11" placeholder="请输入您的联系电话" type="number"></input>
+    </view>
+</view>
+<view class="padding margin-sm radius bg-white shadow text-black" style="min-height: 288rpx;">
+    <view class="flex align-center solid-bottom padding-bottom-sm">
+        <view class="padding-lr-xs">
+            <image mode="aspectFill" src="{{img}}" style="width: 130rpx;height: 130rpx;"></image>
+        </view>
+        <view class="text-sm padding-left-xs">
+            <view class="">{{title}}</view>
+            <view class="padding-top-xs text-red">￥{{price}}</view>
+        </view>
+    </view>
+    <view class="padding-top-sm flex align-start item">
+        <view style="min-width: 75rpx;">备注:</view>
+        <textarea autoHeight bindinput="input" placeholder="请输入备注内容" placeholderClass="text-grey" style="padding: 7rpx;min-height: 150rpx;"></textarea>
+    </view>
+</view>
+<view class="padding-lr margin-sm radius bg-white shadow text-black">
+    <view class="flex align-center justify-between solid-bottom item">
+        <view class="">商品金额</view>
+        <view class="text-red">￥{{price}}</view>
+    </view>
+</view>
+<view class="cu-bar bg-white tabbar border shop foot" style="height: 100rpx;">
+    <view class="action padding-left-xl text-red" style="font-size:34rpx;">￥{{price}}</view>
+    <button bindtap="submit" class="bg-red submit text-df" style="max-width: 280rpx;background: {{system.foot_color2}};color: {{system.text_color}};">{{order_id?'立即支付':'提交订单'}}</button>
+</view>
+<tabbar show="{{show_tabbar}}"></tabbar>
+<blacklist isShow="{{userInfo.state==1}}"></blacklist>

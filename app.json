@@ -1,0 +1,81 @@
+{
+    "pages": [
+        "page/index",
+        "u_pages/index/index",
+        "u_pages/index/notice/index",
+        "u_pages/lawyer/info",
+        "u_pages/lawyer/index",
+        "u_pages/lawyer/subscribe/index",
+        "u_pages/news/info",
+        "u_pages/news/index",
+        "u_pages/user/index",
+        "u_pages/user/helper/info",
+        "u_pages/user/about/index",
+        "u_pages/user/helper/index",
+        "u_pages/user/collect/index",
+        "u_pages/shop/index",
+        "u_pages/shop/info/index",
+        "u_pages/shop/search/index",
+        "u_pages/result/index",
+        "u_pages/shop/order_details/index",
+        "u_pages/orders/index",
+        "u_pages/lawyer/orders/index",
+        "u_pages/lawyer/service_log/index",
+        "u_pages/orders/evaluate/index",
+        "u_pages/orders/info/index",
+        "u_pages/lawyer/service_log/edit/index",
+        "u_pages/orders/logistics/index",
+        "u_pages/user/enter/index",
+        "u_pages/user/domain/index",
+        "u_pages/html_page/index",
+        "u_pages/diy/index",
+        "u_pages/poster/index",
+        "u_pages/chat/index",
+        "u_pages/chat/info"
+      
+    ],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#fff",
+        "backgroundColor": "#fff",
+        "backgroundTextStyle": "dark"
+   
+}  ,  "sitemapLocation": "sitemap.json",
+    "usingComponents": {
+        "tabbar": "components/tabbar/index",
+        "banner": "components/banner/index",
+        "title": "components/title/index",
+        "lawyer-list": "components/lawyer-list/index",
+        "news-list": "components/news-list/index",
+        "comment": "components/comment/index",
+        "notice": "components/notice/index",
+        "goods": "components/goods/index",
+        "login": "components/login/index",
+        "search": "components/search/index",
+        "blacklist": "components/blacklist/index",
+        "painter": "components/painter/index",
+        "wxparser": "components/wxparser/index",
+        "wux-cell": "wux-weapp/cell/index",
+        "wux-rater": "wux-weapp/rater/index"
+    },
+	"subpackages": [{
+		"root": "l_pages",
+		"name": "lawyer",
+		"pages": [
+			"index/index",
+			"finance/index",
+			"finance/withdraw/index",
+			"orders/index",
+			"orders/info/index",
+			"enter/index",
+			"renew/index",
+			"evaluate/index"
+		]
+	}],
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于计算距离"
+        }
+    },
+    "plugins": {}
+}

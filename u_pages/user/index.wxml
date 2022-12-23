@@ -1,0 +1,101 @@
+<view class="header text-white">
+    <view class="padding-xl flex align-start bg" style="background-image: url({{system.user_bg}});">
+        <view class="flex align-center flex-sub">
+            <image class="round" mode="aspectFill" src="{{userInfo.is_law!=0?userInfo.avatarUrl:'/static/icon/user_none.png'}}" style="width: 100rpx;height: 100rpx;background:#f3f3f3"></image>
+            <view class="flex justify-between align-center flex-sub">
+                <view class="padding-left-sm">
+                    <view bind:tap="login" class="text-df">{{userInfo.gender.length?userInfo.nickName:'立即登录'}}</view>
+                    <view class="text-sm padding-top-sm" wx:if="{{userInfo.gender.length}}">{{userInfo.phone||'未绑定手机号'}}</view>
+                    <view class="text-sm padding-top-sm" wx:else>当前身份: {{userInfo.nickName||'游客'}}</view>
+                </view>
+                <view bindtap="updeta" class="text-xl padding-right" wx:if="{{userInfo.gender}}">
+                    <view class="{{updeta&&'updeta'}}">
+                        <text class="yzd-gengxin"></text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="nav bg-white padding-lr-xl grid col-5">
+        <view bindtap="toPage" class="flex flex-direction align-center justify-center padding-sm" data-key="index" data-page="lawyer_orders" data-value="{{index+1}}" wx:for="{{nav}}">
+            <text class="nav_text {{item.icon}}"></text>
+            <view class="text-sm padding-top-xs">{{item.title}}</view>
+        </view>
+    </view>
+</view>
+<form reportSubmit bindsubmit="submitFromId">
+    <view class="padding-top" style="padding-left: 25rpx;padding-right: 25rpx;">
+        <view class="bg-white padding-lr-sm" style="border-radius: 15rpx;">
+            <button bindtap="toPage" class="item flex align-center text-lg" data-page="lawyer_orders" formType="submit">
+                <text class="yzd-order"></text>
+                <view class="padding-left-sm flex-sub text-df">服务订单
+				</view>
+                <text class="cuIcon-right text-gray"></text>
+            </button>
+            <button bindtap="toPage" class="item flex align-center text-lg" data-page="orders" formType="submit">
+                <text class="yzd-activity"></text>
+                <view class="padding-left-sm flex-sub text-df">商城订单
+				</view>
+                <text class="cuIcon-right text-gray"></text>
+            </button>
+            <button bindtap="toPage" class="item flex align-center text-lg" data-page="collect" formType="submit">
+                <text class="yzd-select"></text>
+                <view class="padding-left-sm flex-sub text-df">我的收藏
+				</view>
+                <text class="cuIcon-right text-gray"></text>
+            </button>
+            <button bindgetphonenumber="getPhoneNumber" class="item flex align-center text-lg" formType="submit" openType="getPhoneNumber" wx:if="{{userInfo.gender}}">
+                <text class="yzd-mobilephone"></text>
+                <view class="padding-left-sm flex-sub text-df">更新手机号
+					<view class="cu-tag round bg-red sm margin-left" wx:if="{{userInfo&&!userInfo.phone}}">未绑定</view>
+                </view>
+                <text class="cuIcon-right text-gray"></text>
+            </button>
+        </view>
+    </view>
+    <view class="padding-top" style="padding-left: 25rpx;padding-right: 25rpx;">
+        <view class="bg-white padding-lr-sm" style="border-radius: 15rpx;">
+            <button bindtap="toPage" class="item flex align-center text-lg" data-page="helper" formType="submit">
+                <text class="yzd-prompt"></text>
+                <view class="padding-left-sm flex-sub text-df">帮助中心
+				</view>
+                <text class="cuIcon-right text-gray"></text>
+            </button>
+            <button bindtap="toPage" class="item flex align-center text-lg" data-page="about" formType="submit">
+                <text class="yzd-emoji"></text>
+                <view class="padding-left-sm flex-sub text-df">关于我们
+				</view>
+                <text class="cuIcon-right text-gray"></text>
+            </button>
+            <button class="item flex align-center text-lg" formType="submit" openType="contact">
+                <text class="yzd-message"></text>
+                <view class="padding-left-sm flex-sub text-df">联系客服
+				</view>
+                <text class="cuIcon-right text-gray"></text>
+            </button>
+            <button bindtap="toPage" class="item flex align-center text-lg" data-page="clearCache" formType="submit">
+                <text class="cuIcon-delete"></text>
+                <view class="padding-left-sm flex-sub text-df">清除缓存
+				</view>
+                <text class="cuIcon-right text-gray"></text>
+            </button>
+        </view>
+    </view>
+    <view class="padding-top" style="padding-left: 25rpx;padding-right: 25rpx;">
+        <view class="bg-white padding-lr-sm" style="border-radius: 15rpx;">
+            <button bindtap="toPage" class="item flex align-center text-lg" data-page="{{law_item}}" formType="submit" openType="{{i.openType}}" wx:if="{{law_item.page=='l_index'||system.law_is_inset==2}}">
+                <text class="{{law_item.icon}}"></text>
+                <view class="padding-left-sm flex-sub text-df">{{law_item.title}}
+				</view>
+                <text class="cuIcon-right text-gray"></text>
+            </button>
+        </view>
+    </view>
+</form>
+<login isShow="{{isLogin}}" mainColor="{{system.foot_color2}}"></login>
+<view bindtap="call" class="flex flex-direction align-center justify-center padding-tb">
+    <image mode="widthFix" src="{{system.xcx_dbbq_img}}" style="width: 80rpx;" wx:if="{{system.xcx_dbbq_img}}"></image>
+    <view class="padding-left-xs text-xs text-grey">{{system.xcx_dbbq}}</view>
+</view>
+<tabbar show="{{show_tabbar}}"></tabbar>
+<blacklist isShow="{{userInfo.state==1}}"></blacklist>
